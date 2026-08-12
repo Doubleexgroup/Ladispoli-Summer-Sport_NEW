@@ -19,7 +19,7 @@
 
 const PAGES = [
   { title: "Home",       href: "index.html" },
-  /*{ title: "Guest Star", href: "gueststar.html" },*/
+  /* { title: "Guest Star", href: "gueststar.html" }, */
   { title: "Programma",   href: "programma.html" },
 
 
