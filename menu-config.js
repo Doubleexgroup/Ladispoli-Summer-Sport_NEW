@@ -20,7 +20,10 @@
 const PAGES = [
   { title: "Home",       href: "index.html" },
   { title: "Guest Star", href: "gueststar.html" },
+  { title: "Programma",   href: "programma.html" },
 
+
+   
   /* Aggiungi qui le tue nuove pagine, ad esempio:
   { title: "Programma",   href: "programma.html" },
   { title: "Eventi",      href: "eventi.html" },
