@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Programma - Ladispoli Summer Sport</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#041b45;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+
+    .header{
+      padding:80px 20px 40px;
+      text-align:center;
+    }
+
+    .header h1{
+      font-size:4rem;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .header p{
+      margin-top:15px;
+      font-size:1.2rem;
+      opacity:.8;
+    }
+
+    .back-home{
+      display:inline-block;
+      margin-top:25px;
+      background:linear-gradient(90deg,#ff6a00,#ffb300);
+      color:white;
+      text-decoration:none;
+      padding:16px 30px;
+      border-radius:16px;
+      font-weight:700;
+      transition:.3s;
+    }
+
+    .back-home:hover{
+      transform:translateY(-3px);
+      opacity:.95;
+    }
+
+    /* GRIGLIA LOCANDINE */
+
+    .poster-container{
+      width:100%;
+      max-width:1400px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:32px;
+      padding:40px 20px 100px;
+      align-items:start;
+    }
+
+    /* CARD SINGOLA LOCANDINA
+       Non forza più proporzioni fisse: il contenitore si adatta
+       all'altezza naturale dell'immagine, senza ritagliarla. */
+    .poster-card{
+      display:flex;
+      flex-direction:column;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 15px 40px rgba(0,0,0,.35);
+      background:#0b2c68;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+
+    .poster-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 50px rgba(0,0,0,.5);
+    }
+
+    .poster-image{
+      width:100%;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#0b2c68;
+    }
+
+    .poster-image img{
+      width:100%;
+      height:auto;
+      display:block;
+      /* object-fit:contain garantisce che l'intera locandina sia
+         sempre visibile, senza tagli, qualunque sia la sua proporzione */
+      object-fit:contain;
+    }
+
+    /* ETICHETTA - fuori dall'immagine, come didascalia sotto la locandina */
+    .poster-label{
+      padding:14px 16px;
+      font-weight:700;
+      font-size:1rem;
+      text-align:center;
+      background:#0b2c68;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    /* LIGHTBOX - visualizzazione a schermo intero della locandina cliccata */
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.9);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:2000;
+      padding:30px;
+    }
+
+    .lightbox.open{
+      display:flex;
+    }
+
+    .lightbox img{
+      max-width:100%;
+      max-height:100%;
+      border-radius:14px;
+      box-shadow:0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:24px;
+      right:24px;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:none;
+      background:linear-gradient(135deg,#ff6a00,#ff2d00);
+      color:white;
+      font-size:1.8rem;
+      line-height:1;
+      cursor:pointer;
+      z-index:2001;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      text-align:center;
+      padding:50px 20px;
+      opacity:.7;
+      font-size:.95rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      .header h1{
+        font-size:2.7rem;
+      }
+
+      .poster-container{
+        grid-template-columns:1fr 1fr;
+        gap:18px;
+        padding:30px 16px 80px;
+      }
+
+    }
+
+    @media(max-width:480px){
+
+      .poster-container{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <div class="header">
+    <h1>Programma</h1>
+    <p>Tutte le locandine degli eventi del Ladispoli Summer Sport</p>
+    <a href="index.html" class="back-home">← Torna alla Home</a>
+  </div>
+
+  <!-- GRIGLIA LOCANDINE (generata automaticamente da POSTERS qui sotto) -->
+
+  <section class="poster-container" id="poster-container"></section>
+
+  <!-- LIGHTBOX per la visualizzazione a schermo intero -->
+
+  <div class="lightbox" id="lightbox">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Chiudi">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+    © 2026 Ladispoli Summer Sport - Doubleexevent
+  </div>
+
+  <script>
+  /* =========================================================================
+     ELENCO LOCANDINE - Modifica solo qui per aggiungere/togliere locandine
+     =========================================================================
+     Ogni riga è una locandina. Basta aggiungerne di nuove, nello stesso
+     formato, senza toccare il resto del file.
+
+     - file  : nome del file immagine dentro la cartella "image"
+     - label : testo mostrato sotto la locandina (facoltativo, si può
+               lasciare vuoto con "")
+     ========================================================================= */
+
+  const POSTERS = [
+    { file: "image/programma-1.jpeg", label: "" },
+    { file: "image/programma-2.jpeg", label: "" },
+    { file: "image/programma-3.jpeg", label: "" },
+
+    /* Aggiungi qui altre locandine, ad esempio:
+    { file: "image/programma-4.jpeg", label: "Serata Finale" },
+    { file: "image/programma-5.jpeg", label: "" },
+    */
+  ];
+
+  /* ========================================================================= 
+     Da qui in poi è solo codice che costruisce la griglia e il lightbox:
+     non serve modificarlo.
+     ========================================================================= */
+
+  (function () {
+    const container = document.getElementById('poster-container');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    POSTERS.forEach(function (poster) {
+      const card = document.createElement('div');
+      card.className = 'poster-card';
+
+      const imageWrap = document.createElement('div');
+      imageWrap.className = 'poster-image';
+
+      const img = document.createElement('img');
+      img.src = poster.file;
+      img.alt = poster.label || 'Locandina Ladispoli Summer Sport';
+      img.loading = 'lazy';
+      imageWrap.appendChild(img);
+      card.appendChild(imageWrap);
+
+      if (poster.label) {
+        const label = document.createElement('div');
+        label.className = 'poster-label';
+        label.textContent = poster.label;
+        card.appendChild(label);
+      }
+
+      imageWrap.addEventListener('click', function () {
+        lightboxImg.src = poster.file;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+
+      container.appendChild(card);
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  })();
+  </script>
+
+</body>
+</html>
