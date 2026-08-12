@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Guest Star - Ladispoli Summer Sport</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stile del menu laterale, condiviso da tutte le pagine del sito -->
+  <link rel="stylesheet" href="menu.css">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#041b45;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+
+    .header{
+      padding:80px 20px 40px;
+      text-align:center;
+    }
+
+    .header h1{
+      font-size:4rem;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .header p{
+      margin-top:15px;
+      font-size:1.2rem;
+      opacity:.8;
+    }
+
+    .back-home{
+      display:inline-block;
+
+      margin-top:25px;
+
+      background:linear-gradient(90deg,#ff6a00,#ffb300);
+
+      color:white;
+      text-decoration:none;
+
+      padding:16px 30px;
+
+      border-radius:16px;
+
+      font-weight:700;
+
+      transition:.3s;
+    }
+
+    .back-home:hover{
+      transform:translateY(-3px);
+      opacity:.95;
+    }
+
+    /* GRID GUEST */
+
+    .guest-container{
+
+      width:100%;
+      max-width:1400px;
+
+      margin:auto;
+
+      display:grid;
+
+      grid-template-columns:
+      repeat(auto-fit,minmax(250px,1fr));
+
+      gap:28px;
+
+      padding:40px 20px 80px;
+    }
+
+    /* CARD */
+
+   .guest-card{
+
+  background:white;
+  color:#041b45;
+
+  border-radius:28px;
+
+  overflow:hidden;
+
+  transition:all .35s ease;
+
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+  position:relative;
+
+  display:flex;
+  flex-direction:column;
+}
+
+    /* IMMAGINE */
+
+ /* CONTENITORE FOTO */
+
+.guest-image{
+
+  width:100%;
+
+  height:260px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  padding:15px;
+
+  position:relative;
+
+  background:
+  radial-gradient(circle at top left,
+  rgba(255,179,0,.35),
+  transparent 40%),
+
+  radial-gradient(circle at bottom right,
+  rgba(255,106,0,.35),
+  transparent 40%),
+
+  linear-gradient(
+  135deg,
+  #041b45 0%,
+  #0b2c68 45%,
+  #ff6a00 100%);
+}
+
+.guest-image img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  object-position:center top;
+
+  display:block;
+
+  border-radius:22px 22px 0 0;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+  transition:transform .4s ease;
+}
+    /* TESTI */
+
+    .guest-info{
+      padding:22px;
+      text-align:center;
+    }
+
+    .guest-info h2{
+      font-size:1.4rem;
+      margin-bottom:10px;
+      font-weight:800;
+    }
+
+    .guest-info p{
+      opacity:.8;
+      line-height:1.6;
+      font-size:.95rem;
+    }
+
+    /* Spazio tra frasi/paragrafi separati dentro la stessa card.
+       Se una card ha più <p>, questo aggiunge distanza tra loro
+       (:not(:last-child) evita spazio in eccesso dopo l'ultimo) */
+    .guest-info p:not(:last-child){
+      margin-bottom:10px;
+    }
+
+    /* Grassetto leggero, non troppo marcato (600 invece del bold pieno a 700) */
+    .guest-subtitle{
+      font-weight:600;
+      opacity:.95;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      text-align:center;
+      padding:50px 20px;
+      opacity:.7;
+      font-size:.95rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      .header h1{
+        font-size:2.7rem;
+      }
+
+      .guest-container{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <h1>Guest Star</h1>
+
+    <p>
+      Scopri gli ospiti speciali del Ladispoli Summer Sport
+    </p>
+
+    <a href="index.html" class="back-home">
+      ← Torna alla Home
+    </a>
+
+  </div>
+
+  <!-- GUEST -->
+
+  <section class="guest-container">
+
+    <!-- GUEST 1 -->
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/brocchi.jpg"
+        alt="Guest Star 1"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Cristian Brocchi</h2>
+        <p>
+          Ex centrocampista che ha militato nelle file di Milan, Pro Sesto, Lumezzane, Verona, Inter, Fiorentina e Lazio
+        </p>
+      </div>
+
+    </div>
+
+    <!-- GUEST 2 -->
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/panucci oggi.jpg"
+        alt="Guest Star 2"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Cristian Panucci</h2>
+        <p>
+          Ex difensore che ha militato nelle file di Genoa, Milan, Real Madrid, Inter, Chelsea, Monaco, Roma e Parma
+        </p>
+      </div>
+
+    </div>
+
+    <!-- GUEST 3 -->
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/giuffrida.jpg"
+        alt="Guest Star 3"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Chiara Giuffrida</h2>
+
+        <p>Madrina del Ladispoli Summer Sport</p>
+
+        <p>
+          Nota giornalista pubblicista, conduttrice televisiva e
+          speaker radiofonica italiana, specializzata nel settore sportivo e legata
+          in particolare al mondo del calcio
+        </p>
+      </div>
+
+    </div>
+
+    <!-- AGGIUNGI QUI ALTRI GUEST -->
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/di canio.jpeg"
+        alt="Guest Star 3"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Paolo Di Canio</h2>
+        <p>
+          Ex attaccante e seconda punta che ha militato nelle file di Lazio,
+          Ternana, Juventus, Napoli, Milan, Celtic, Sheffield Wednesday, West Ham United, Charlton Athletic e Cisco Roma
+        </p>
+      </div>
+
+    </div>
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/ventola.jpg"
+        alt="Guest Star 3"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Nicola Ventola</h2>
+        <p>
+          Ex attaccante che ha militato nelle file di Bari, Inter, Bologna, Atalanta, Siena, Crystal Palace, Torino e Novara.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/amoruso oggi.jpg"
+        alt="Guest Star 3"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Nicola Amoruso</h2>
+        <p>
+          Ex attaccante che ha militato nelle file di Sampdoria, Fidelis Andria, Padova, Juventus, Perugia, Napoli, Como,
+          Modena, Messina, Reggina, Torino, Siena, Parma, Verona e Atalanta
+        </p>
+      </div>
+
+    </div>
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/marc iuliano oggi2.jpeg"
+        alt="Guest Star 3"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Mark Iuliano</h2>
+        <p>
+          Ex difensore che ha militato nelle file di Salernitana, Bologna, Monza, Juventus, Real Mallorca, Sampdoria, Messina e Ravenna
+        </p>
+      </div>
+
+    </div>
+
+    <div class="guest-card">
+
+      <div class="guest-image">
+        <img src="image/iaquinta5 copia.jpeg"
+        alt="Guest Star 3"
+        loading="lazy">
+      </div>
+
+      <div class="guest-info">
+        <h2>Vincenzo Iaquinta</h2>
+        <p>
+          Ex attaccante che ha militato nelle file di Reggiolo, Padova, Castel di Sangro, Udinese, Juventus e Cesena.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+    © 2026 Ladispoli Summer Sport - Doubleexevent
+  </div>
+
+  <!-- MENU LATERALE: i titoli e i link delle pagine si modificano in menu-config.js -->
+  <script src="menu-config.js" defer></script>
+  <script src="menu.js" defer></script>
+
+</body>
+</html>

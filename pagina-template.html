@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--
+  ================================================================
+  TEMPLATE PER UNA NUOVA PAGINA CON LOCANDINA
+  ================================================================
+  Per creare una nuova pagina:
+  1. Copia questo file e rinominalo (es. "programma.html").
+  2. Cambia il <title> qui sotto.
+  3. Sostituisci il percorso dell'immagine nel tag <img> più in basso
+     (cerca "SOSTITUISCI QUI") con la tua locandina.
+  4. Aggiungi la nuova pagina in menu-config.js così compare nel menu:
+     { title: "Il titolo che vuoi", href: "programma.html" },
+  Nessun'altra modifica è necessaria: il menu laterale, il font e
+  lo stile si caricano automaticamente da menu.css e menu.js.
+  ================================================================
+-->
+
+<title>Nome Pagina - Ladispoli Summer Sport</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Stile del menu laterale, condiviso da tutte le pagine del sito -->
+<link rel="stylesheet" href="menu.css">
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+width:100%;
+height:100vh;
+height:100dvh;
+background:#041b45;
+font-family:'Montserrat',sans-serif;
+overflow:hidden;
+}
+
+.container{
+position:relative;
+width:100%;
+height:100vh;
+height:100dvh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+/* Wrapper con le stesse proporzioni della locandina (1024x1536 = 2:3).
+   Se la tua locandina ha proporzioni diverse, aggiorna il valore
+   di aspect-ratio qui sotto. */
+.poster-wrap{
+position:relative;
+height:96vh;
+height:96dvh;
+aspect-ratio:1024/1536;
+max-width:96%;
+max-height:96%;
+overflow:hidden;
+border-radius:14px;
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.poster-wrap img{
+position:absolute;
+inset:0;
+display:block;
+width:100%;
+height:100%;
+object-fit:contain;
+user-select:none;
+pointer-events:none;
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media(max-width:768px){
+
+.poster-wrap{
+height:auto;
+width:100%;
+max-width:100%;
+max-height:100%;
+border-radius:0;
+box-shadow:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="poster-wrap">
+
+<!-- SOSTITUISCI QUI con il percorso della tua locandina -->
+<img src="image/NOME-DELLA-TUA-LOCANDINA.jpeg"
+alt="Nome Pagina - Ladispoli Summer Sport">
+
+</div>
+
+</div>
+
+<!-- MENU LATERALE: i titoli e i link delle pagine si modificano in menu-config.js -->
+<script src="menu-config.js" defer></script>
+<script src="menu.js" defer></script>
+
+</body>
+</html>

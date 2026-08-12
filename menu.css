@@ -1,0 +1,173 @@
+/* =========================================================================
+   STILE MENU LATERALE - Ladispoli Summer Sport
+   ========================================================================= */
+
+/* Pulsante hamburger, fisso in alto a destra su ogni pagina */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ff6a00, #ff2d00);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, .35),
+    0 0 20px rgba(255, 106, 0, .55);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.menu-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  background: white;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Sfondo scuro dietro al menu quando è aperto */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 998;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pannello laterale */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  height: 100dvh;
+  width: 300px;
+  max-width: 82%;
+  background: #041b45;
+  border-left: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, .5);
+  transform: translateX(100%);
+  transition: transform .35s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.side-menu.open {
+  transform: translateX(0);
+}
+
+.side-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 24px 18px;
+  color: white;
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.menu-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .2s ease;
+}
+
+.menu-close:hover {
+  opacity: 1;
+}
+
+.side-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  overflow-y: auto;
+}
+
+.side-menu li a {
+  display: block;
+  padding: 16px 24px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  opacity: .85;
+  border-left: 3px solid transparent;
+  transition: background .2s ease, opacity .2s ease, border-color .2s ease;
+}
+
+.side-menu li a:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, .05);
+  border-left-color: #ff6a00;
+}
+
+.side-menu li a.active {
+  opacity: 1;
+  color: #ffb300;
+  border-left-color: #ff6a00;
+  background: rgba(255, 106, 0, .08);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .menu-toggle {
+    top: 14px;
+    right: 14px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .side-menu {
+    width: 260px;
+  }
+
+  .side-menu-header {
+    padding: 22px 20px 14px;
+  }
+
+  .side-menu li a {
+    padding: 15px 20px;
+    font-size: 1rem;
+  }
+}
