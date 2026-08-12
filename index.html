@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ladispoli Summer Sport</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Stile del menu laterale, condiviso da tutte le pagine del sito -->
+<link rel="stylesheet" href="menu.css">
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+width:100%;
+height:100vh;
+height:100dvh;
+background:#041b45;
+font-family:'Montserrat',sans-serif;
+overflow:hidden;
+}
+
+/* CONTAINER */
+
+.container{
+position:relative;
+width:100%;
+height:100vh;
+height:100dvh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+/* WRAPPER POSTER - stesse proporzioni della locandina (1024x1536 = 2:3) */
+
+.poster-wrap{
+position:relative;
+height:96vh;
+height:96dvh;
+aspect-ratio:1024/1536;
+max-width:96%;
+max-height:96%;
+overflow:hidden;
+border-radius:14px;
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.poster-wrap img{
+position:absolute;
+inset:0;
+display:block;
+width:100%;
+height:100%;
+object-fit:contain;
+user-select:none;
+pointer-events:none;
+}
+
+/* BANNER PRENOTAZIONI - fisso in basso */
+
+.booking-banner{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+z-index:500;
+background:linear-gradient(90deg,#ff6a00,#ffb300);
+color:white;
+text-align:center;
+padding:14px 16px;
+font-weight:600;
+font-size:1rem;
+line-height:1.5;
+box-shadow:0 -10px 30px rgba(0,0,0,.35);
+}
+
+.booking-banner a{
+color:white;
+font-weight:800;
+text-decoration:underline;
+white-space:nowrap;
+}
+
+/* ---------------- DESKTOP ----------------
+   Riserva lo spazio del banner in basso, così la locandina non
+   finisce mai nascosta dietro al banner fisso. */
+
+@media(min-width:769px){
+
+.container{
+height:calc(100vh - 70px);
+height:calc(100dvh - 70px);
+}
+
+}
+
+/* ---------------- MOBILE ---------------- */
+
+@media(max-width:768px){
+
+.poster-wrap{
+height:auto;
+width:100%;
+max-width:100%;
+max-height:100%;
+border-radius:0;
+box-shadow:none;
+}
+
+.booking-banner{
+font-size:.85rem;
+padding:12px 14px;
+}
+
+.container{
+height:calc(100vh - 80px);
+height:calc(100dvh - 80px);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="poster-wrap">
+
+<!-- Sostituisci qui il nome del file con la tua nuova locandina, caricata nella cartella image -->
+<img src="image/ladispoli locandina nuova.jpeg"
+alt="Ladispoli Summer Sport">
+
+</div>
+
+</div>
+
+<!-- BANNER PRENOTAZIONI CAMPI -->
+
+<div class="booking-banner">
+  Per prenotare i campi scrivi a
+  <a href="mailto:ladispolisummersport@gmail.com">ladispolisummersport@gmail.com</a>
+</div>
+
+<!-- MENU LATERALE: i titoli e i link delle pagine si modificano in menu-config.js -->
+<script src="menu-config.js" defer></script>
+<script src="menu.js" defer></script>
+
+</body>
+</html>
