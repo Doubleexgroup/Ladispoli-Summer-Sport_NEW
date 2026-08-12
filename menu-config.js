@@ -21,7 +21,7 @@ const PAGES = [
   { title: "Home",       href: "index.html" },
   /* { title: "Guest Star", href: "gueststar.html" }, */
   { title: "Programma",   href: "programma.html" },
-
+  { title: "Prenotazione Campi",   href: "prenotazione.html" },
 
    
   /* Aggiungi qui le tue nuove pagine, ad esempio:
