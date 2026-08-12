@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Prenotazione - Ladispoli Summer Sport</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#041b45;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+
+    .header{
+      padding:80px 20px 40px;
+      text-align:center;
+    }
+
+    .header h1{
+      font-size:4rem;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .header p{
+      margin-top:15px;
+      font-size:1.2rem;
+      opacity:.8;
+    }
+
+    .back-home{
+      display:inline-block;
+      margin-top:25px;
+      background:linear-gradient(90deg,#ff6a00,#ffb300);
+      color:white;
+      text-decoration:none;
+      padding:16px 30px;
+      border-radius:16px;
+      font-weight:700;
+      transition:.3s;
+    }
+
+    .back-home:hover{
+      transform:translateY(-3px);
+      opacity:.95;
+    }
+
+    /* GRIGLIA - dimensione ridotta e centrata, uguale per tutte le card */
+
+    .poster-container{
+      width:100%;
+      max-width:1400px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(160px,190px));
+      justify-content:center;
+      gap:24px;
+      padding:40px 20px 100px;
+      align-items:start;
+    }
+
+    /* CARD */
+
+    .poster-card{
+      display:flex;
+      flex-direction:column;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 15px 40px rgba(0,0,0,.35);
+      background:#0b2c68;
+      transition:transform .3s ease, box-shadow .3s ease;
+      text-decoration:none;
+      color:white;
+    }
+
+    .poster-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 50px rgba(0,0,0,.5);
+    }
+
+    /* RIQUADRO IMMAGINE - altezza fissa uguale per tutte le card,
+       così immagini e PDF risultano sempre della stessa dimensione */
+    .poster-image{
+      width:100%;
+      height:260px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#0b2c68;
+    }
+
+    .poster-image img{
+      width:100%;
+      height:100%;
+      display:block;
+      /* object-fit:contain mostra sempre l'intero file, senza
+         tagliarlo né deformarlo, qualunque sia la sua proporzione */
+      object-fit:contain;
+    }
+
+    /* Icona per le card di tipo PDF */
+    .pdf-icon{
+      width:64px;
+      height:64px;
+      opacity:.9;
+    }
+
+    /* ETICHETTA - fuori dal contenuto, come didascalia */
+    .poster-label{
+      min-height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 16px;
+      font-weight:700;
+      font-size:1rem;
+      text-align:center;
+      background:#0b2c68;
+      border-top:1px solid rgba(255,255,255,.08);
+      word-break:break-word;
+    }
+
+    /* Etichetta piccola "PDF" per riconoscere subito il tipo di file */
+    .file-type-tag{
+      display:inline-block;
+      margin-top:4px;
+      font-size:.7rem;
+      font-weight:800;
+      letter-spacing:.5px;
+      color:#ffb300;
+      text-transform:uppercase;
+    }
+
+    /* LIGHTBOX - visualizzazione a schermo intero (solo per le immagini) */
+
+    .lightbox{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.9);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:2000;
+      padding:30px;
+    }
+
+    .lightbox.open{
+      display:flex;
+    }
+
+    .lightbox img{
+      max-width:100%;
+      max-height:100%;
+      border-radius:14px;
+      box-shadow:0 20px 60px rgba(0,0,0,.6);
+    }
+
+    .lightbox-close{
+      position:absolute;
+      top:24px;
+      right:24px;
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:none;
+      background:linear-gradient(135deg,#ff6a00,#ff2d00);
+      color:white;
+      font-size:1.8rem;
+      line-height:1;
+      cursor:pointer;
+      z-index:2001;
+    }
+
+    /* BANNER PRENOTAZIONI - fisso in basso */
+
+    .booking-banner{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:500;
+      background:linear-gradient(90deg,#ff6a00,#ffb300);
+      color:white;
+      text-align:center;
+      padding:14px 16px;
+      font-weight:600;
+      font-size:1rem;
+      line-height:1.5;
+      box-shadow:0 -10px 30px rgba(0,0,0,.35);
+    }
+
+    .booking-banner a{
+      color:white;
+      font-weight:800;
+      text-decoration:underline;
+      white-space:nowrap;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      text-align:center;
+      padding:50px 20px 110px;
+      opacity:.7;
+      font-size:.95rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      .header h1{
+        font-size:2.7rem;
+      }
+
+      .poster-container{
+        grid-template-columns:repeat(auto-fit,minmax(130px,150px));
+        gap:16px;
+        padding:30px 16px 80px;
+      }
+
+      .poster-image{
+        height:190px;
+      }
+
+      .booking-banner{
+        font-size:.85rem;
+        padding:12px 14px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <div class="header">
+    <h1>Prenotazione</h1>
+    <p>Locandine e documenti utili per le prenotazioni</p>
+    <a href="index.html" class="back-home">← Torna alla Home</a>
+  </div>
+
+  <!-- GRIGLIA (generata automaticamente da CONTENTS qui sotto) -->
+
+  <section class="poster-container" id="poster-container"></section>
+
+  <!-- LIGHTBOX per la visualizzazione a schermo intero delle immagini -->
+
+  <div class="lightbox" id="lightbox">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Chiudi">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="footer">
+    © 2026 Ladispoli Summer Sport - Doubleexevent
+  </div>
+
+  <!-- BANNER PRENOTAZIONI CAMPI -->
+
+  <div class="booking-banner">
+    Per prenotare i campi scrivi a
+    <a href="mailto:ladispolisummersport@gmail.com">ladispolisummersport@gmail.com</a>
+  </div>
+
+  <script>
+  /* =========================================================================
+     ELENCO CONTENUTI - Modifica solo qui per aggiungere/togliere elementi
+     =========================================================================
+     Ogni riga può essere un'immagine oppure un PDF. Basta aggiungerne di
+     nuovi, nello stesso formato, senza toccare il resto del file.
+
+     Per un'IMMAGINE:
+     { type: "image", file: "image/nome-file.jpeg", label: "" }
+
+     Per un PDF:
+     { type: "pdf", file: "image/nome-documento.pdf", label: "Modulo Iscrizione" }
+
+     - file  : percorso del file dentro la cartella "image"
+               (le immagini e i pdf possono stare nella stessa cartella)
+     - label : testo mostrato sotto la card (per i PDF conviene sempre
+               scriverlo, così si capisce di cosa si tratta)
+     ========================================================================= */
+
+  const CONTENTS = [
+    { type: "image", file: "image/prenotazione-1.jpeg", label: "" },
+    { type: "pdf",   file: "image/modulo-prenotazione.pdf", label: "Modulo Prenotazione" },
+
+    /* Aggiungi qui altri elementi, ad esempio:
+    { type: "image", file: "image/prenotazione-2.jpeg", label: "" },
+    { type: "pdf",   file: "image/regolamento.pdf", label: "Regolamento Campi" },
+    */
+  ];
+
+  /* ========================================================================= 
+     Da qui in poi è solo codice che costruisce la griglia e il lightbox:
+     non serve modificarlo.
+     ========================================================================= */
+
+  (function () {
+    const container = document.getElementById('poster-container');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    const PDF_ICON_SVG =
+      '<svg class="pdf-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M14 2v6h6" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<text x="12" y="17" font-size="6" font-weight="800" fill="white" text-anchor="middle" font-family="Arial">PDF</text>' +
+      '</svg>';
+
+    CONTENTS.forEach(function (item) {
+
+      if (item.type === 'pdf') {
+
+        // Card PDF: clic apre il documento in una nuova scheda
+        const card = document.createElement('a');
+        card.className = 'poster-card';
+        card.href = item.file;
+        card.target = '_blank';
+        card.rel = 'noopener';
+
+        const imageWrap = document.createElement('div');
+        imageWrap.className = 'poster-image';
+        imageWrap.innerHTML = PDF_ICON_SVG;
+        card.appendChild(imageWrap);
+
+        const label = document.createElement('div');
+        label.className = 'poster-label';
+        label.innerHTML = (item.label || 'Documento PDF') + '<span class="file-type-tag"><br>Apri PDF</span>';
+        card.appendChild(label);
+
+        container.appendChild(card);
+
+      } else {
+
+        // Card immagine: clic apre il lightbox a schermo intero
+        const card = document.createElement('div');
+        card.className = 'poster-card';
+
+        const imageWrap = document.createElement('div');
+        imageWrap.className = 'poster-image';
+
+        const img = document.createElement('img');
+        img.src = item.file;
+        img.alt = item.label || 'Locandina Ladispoli Summer Sport';
+        img.loading = 'lazy';
+        imageWrap.appendChild(img);
+        card.appendChild(imageWrap);
+
+        const label = document.createElement('div');
+        label.className = 'poster-label';
+        label.textContent = item.label || '';
+        card.appendChild(label);
+
+        imageWrap.addEventListener('click', function () {
+          lightboxImg.src = item.file;
+          lightboxImg.alt = img.alt;
+          lightbox.classList.add('open');
+        });
+
+        container.appendChild(card);
+      }
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightboxImg.src = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  })();
+  </script>
+
+</body>
+</html>
